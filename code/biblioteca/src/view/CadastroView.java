@@ -14,6 +14,10 @@ public class CadastroView {
 
         scanner.close();
         
-        CadastroBO.cadastrarUsuario(username, password);
+        if (CadastroBO.isCamposVazios(username, password)
+        && CadastroBO.isUsuarioNaoCadastrado(username)) {
+            
+        };
+        
     }
 }
