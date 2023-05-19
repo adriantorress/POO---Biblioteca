@@ -4,7 +4,9 @@ USE biblioteca;
 
 CREATE TABLE tb_usuario (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(50)
+  nome VARCHAR(50),
+  usuario VARCHAR(50) NOT NULL,
+  senha VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE tb_bibliotecario (
