@@ -4,7 +4,7 @@ import bo.LoginBO;
 import java.util.Scanner;
 
 public class LoginView {
-    public static void exibirFormulario() {
+    public void exibirFormulario() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("---- Login ----");
         System.out.print("Nome de usuário: ");

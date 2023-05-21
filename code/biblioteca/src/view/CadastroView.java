@@ -4,7 +4,7 @@ import bo.CadastroBO;
 import java.util.Scanner;
 
 public class CadastroView {
-    public static void exibirFormulario() {
+    public void exibirFormulario() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("---- Cadastro ----");
         System.out.print("Nome de usuário: ");
