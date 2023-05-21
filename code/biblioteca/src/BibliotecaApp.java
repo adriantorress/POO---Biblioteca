@@ -11,7 +11,7 @@ public class BibliotecaApp {
         int opcao;
         do {
             bibliotecaView.exibirMenu();
-            opcao = bibliotecaView.lerOpcao();
+            opcao = bibliotecaView.lerOpcao().nextInt();
 
             switch (opcao) {
                 case 1:
@@ -22,10 +22,11 @@ public class BibliotecaApp {
                     break;
                 case 0:
                     System.out.println("Encerrando o programa...");
+                    bibliotecaView.lerOpcao().close();
                     break;
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }
-        } while (opcao != 0);
+        } while (bibliotecaView.lerOpcao().hasNextInt() && opcao != 0);
     }
 }
