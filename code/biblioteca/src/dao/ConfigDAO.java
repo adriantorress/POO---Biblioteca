@@ -1,13 +1,12 @@
 package dao;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigDAO {
     private static final String CONFIG_FILE = "config.properties";
-    private static final String URL = "jdbc:mysql://localhost:3306/seu_banco_de_dados";
+    private static String url;
     private static String usuario;
     private static String senha;
 
@@ -15,6 +14,7 @@ public class ConfigDAO {
         Properties prop = new Properties();
         try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
             prop.load(fis);
+            url = prop.getProperty("url");
             usuario = prop.getProperty("usuario");
             senha = prop.getProperty("senha");
         } catch (IOException e) {
@@ -23,7 +23,7 @@ public class ConfigDAO {
     }
 
     public static String getURL() {
-        return URL;
+        return url;
     }
 
     public static String getUsuario() {
