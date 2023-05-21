@@ -1,4 +1,5 @@
 package view;
+
 import java.util.Scanner;
 
 public class BibliotecaView {
@@ -16,8 +17,7 @@ public class BibliotecaView {
         System.out.print("Escolha uma opção: ");
     }
 
-    public int lerOpcao() {
-        return scanner.nextInt();
+    public Scanner lerOpcao() {
+        return scanner;
     }
 }
-
