@@ -1,19 +1,44 @@
 package view;
 
 import bo.LoginBO;
+
 import java.util.Scanner;
+import vo.Usuario;
 
 public class LoginView {
-    public void exibirFormulario() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("---- Login ----");
+
+    String username;
+
+    public Usuario exibirFormulario(Scanner scanner) {
+
+        System.out.println("\n---- Login ----");
+        System.out.println("---- 0 - Voltar ----");
         System.out.print("Nome de usuário: ");
-        String username = scanner.nextLine();
+        username = scanner.nextLine();
+        if (username.equals("0")) {
+            return null;
+        }
+        ;
         System.out.print("Senha: ");
         String password = scanner.nextLine();
 
-        scanner.close();
+        Usuario usuario = LoginBO.realizarLogin(username, password);
 
-        LoginBO.realizarLogin(username, password);
+        while (usuario == null) {
+            System.out.println("\n---- Login ----");
+            System.out.print("Nome de usuário: ");
+            username = scanner.nextLine();
+            if (username.equals("0")) {
+                return null;
+            }
+            ;
+            System.out.print("Senha: ");
+            password = scanner.nextLine();
+            usuario = LoginBO.realizarLogin(username, password);
+        }
+
+        return usuario;
+
     }
+
 }

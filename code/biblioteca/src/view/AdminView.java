@@ -9,7 +9,7 @@ public class AdminView {
     }
 
     public void exibirMenu() {
-        System.out.println("----- AdminView -----");
+        System.out.println("----- Biblioteca -----");
         System.out.println("1. Cadastrar livro");
         System.out.println("2. Atualizar livro");
         System.out.println("3. Excluir livro");

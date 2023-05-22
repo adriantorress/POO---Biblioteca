@@ -2,24 +2,28 @@ package view;
 
 import java.util.Scanner;
 
-public class UsuarioView {
-  private Scanner scanner;
+import vo.Usuario;
 
-  public UsuarioView() {
-    scanner = new Scanner(System.in);
+public class UsuarioView {
+  private Usuario usuario;
+
+  public UsuarioView(Usuario usuario) {
+    this.usuario = usuario;
   }
 
   public void exibirMenu() {
-    System.out.println("----- UsuarioView -----");
+    System.out.printf("\n----- Olá %s -----", this.usuario.getNome());
+    System.out.println();
     System.out.println("1. Novo Empréstimo");
     System.out.println("2. Meus Empréstimos");
     System.out.println("3. Buscar Livros");
     System.out.println("4. Devolver Livros");
-    System.out.println("0. Sair");
-    System.out.print("Escolha uma opção: ");
+    System.out.println("5. Deslogar");
+    System.out.println("0. Finalizar Programa");
   }
 
-  public int lerOpcao() {
-    return scanner.nextInt();
+  public String lerOpcao(Scanner scanner) {
+    System.out.print("\nEscolha uma opção: ");
+    return scanner.nextLine();
   }
 }
