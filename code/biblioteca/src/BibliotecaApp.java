@@ -19,7 +19,7 @@ public class BibliotecaApp {
             bibliotecaView.exibirMenu();
 
             while (!scanner.hasNextInt()) {
-                System.out.println("\nOpção inválida. Tente novamente.\n");
+                System.out.println("\nOpção inválida. Tente novamente.");
                 bibliotecaView.exibirMenu();
                 scanner.next();
             }
@@ -47,7 +47,7 @@ public class BibliotecaApp {
                     scanner.close();
                     break;
                 default:
-                    System.out.println("\nOpção inválida. Tente novamente.\n");
+                    System.out.println("\nOpção inválida. Tente novamente.");
             }
         } while (!opcao.equals("0"));
     }
