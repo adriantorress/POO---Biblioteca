@@ -1,9 +1,9 @@
 package view;
 
 import bo.LoginBO;
+import model.Usuario;
 
 import java.util.Scanner;
-import vo.Usuario;
 
 public class LoginView {
 

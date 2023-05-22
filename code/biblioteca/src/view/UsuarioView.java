@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-import vo.Usuario;
+import model.Usuario;
 
 public class UsuarioView {
   private Usuario usuario;

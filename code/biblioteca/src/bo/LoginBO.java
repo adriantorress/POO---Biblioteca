@@ -1,7 +1,7 @@
 package bo;
 
 import dao.LoginDAO;
-import vo.Usuario;
+import model.Usuario;
 
 public class LoginBO {
   public static Usuario realizarLogin(String username, String password) {

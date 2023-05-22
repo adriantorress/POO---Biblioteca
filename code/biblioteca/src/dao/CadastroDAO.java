@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class CadastroDAO {
   private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
-  private static final String USUARIO = "root";
-  private static final String SENHA = "#241258Aj";
+  private static final String USUARIO = "";
+  private static final String SENHA = "";
 
   public static boolean salvarUsuario(String name, String username, String password) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {

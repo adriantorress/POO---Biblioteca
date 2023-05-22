@@ -2,9 +2,10 @@ import view.BibliotecaView;
 import view.LoginView;
 import view.CadastroView;
 import view.UsuarioView;
-import vo.Usuario;
 
 import java.util.Scanner;
+
+import model.Usuario;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
