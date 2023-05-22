@@ -1,3 +1,4 @@
+DROP SCHEMA biblioteca;
 CREATE SCHEMA biblioteca;
 
 USE biblioteca;
