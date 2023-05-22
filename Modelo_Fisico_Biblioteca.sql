@@ -5,8 +5,8 @@ USE biblioteca;
 
 CREATE TABLE tb_usuario (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  nome VARCHAR(50),
-  usuario VARCHAR(50) NOT NULL,
+  nome VARCHAR(50) NOT NULL,
+  usuario VARCHAR(50) UNIQUE NOT NULL,
   senha VARCHAR(50) NOT NULL
 );
 
@@ -19,8 +19,8 @@ CREATE TABLE tb_bibliotecario (
 CREATE TABLE tb_membro (
   usuario_id INT PRIMARY KEY,
   endereco VARCHAR(255),
-  email VARCHAR(50),
-  telefone VARCHAR(14),
+  email VARCHAR(50) UNIQUE,
+  telefone VARCHAR(14) UNIQUE,
   data_inscricao DATE,
   status ENUM('ativo', 'inativo', 'suspenso'),
   FOREIGN KEY (usuario_id) REFERENCES tb_usuario (id),
@@ -32,14 +32,15 @@ CREATE TABLE tb_historico_cadastro_membro (
   membro_id INT,
   data_cadastro DATE,
   FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
-  FOREIGN KEY (membro_id) REFERENCES tb_membro (usuario_id)
+  FOREIGN KEY (membro_id) REFERENCES tb_membro (usuario_id),
+  PRIMARY KEY (bibliotecario_id,membro_id)
 );
 
 CREATE TABLE tb_livro (
   id INT AUTO_INCREMENT PRIMARY KEY,
   titulo VARCHAR(50),
   autor VARCHAR(50),
-  isbn VARCHAR(20),
+  isbn VARCHAR(20) UNIQUE,
   ano_publicacao INT,
   categoria VARCHAR(30),
   quantidade_disponivel INT,
@@ -51,7 +52,8 @@ CREATE TABLE tb_historico_cadastro_livro (
   livro_id INT,
   data_cadastro DATE,
   FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
-  FOREIGN KEY (livro_id) REFERENCES tb_livro (id)
+  FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
+  PRIMARY KEY (bibliotecario_id,livro_id)
 );
 
 CREATE TABLE tb_emprestimo (
@@ -69,6 +71,7 @@ CREATE TABLE tb_historico_emprestimo (
     FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
     FOREIGN KEY (membro_id) REFERENCES tb_membro (usuario_id),
     FOREIGN KEY (emprestimo_id) REFERENCES tb_emprestimo (id),
-    FOREIGN KEY (livro_id) REFERENCES tb_livro (id)
+    FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
+    PRIMARY KEY (bibliotecario_id,membro_id,livro_id,emprestimo_id)
 );
 
