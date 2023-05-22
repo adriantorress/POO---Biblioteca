@@ -1,6 +1,10 @@
 import view.BibliotecaView;
 import view.LoginView;
 import view.CadastroView;
+import view.UsuarioView;
+import vo.Usuario;
+
+import java.util.Scanner;
 
 public class BibliotecaApp {
     public static void main(String[] args) {
@@ -8,25 +12,43 @@ public class BibliotecaApp {
         LoginView loginView = new LoginView();
         CadastroView cadastroView = new CadastroView();
 
-        int opcao;
+        Scanner scanner = new Scanner(System.in);
+        String opcao;
+
         do {
             bibliotecaView.exibirMenu();
-            opcao = bibliotecaView.lerOpcao().nextInt();
+
+            while (!scanner.hasNextInt()) {
+                System.out.println("\nOpção inválida. Tente novamente.\n");
+                bibliotecaView.exibirMenu();
+                scanner.next();
+            }
+
+            opcao = scanner.nextLine();
 
             switch (opcao) {
-                case 1:
-                loginView.exibirFormulario();
+                case "1":
+                    Usuario usuario = loginView.exibirFormulario(scanner);
+                    if (usuario != null) {
+                        UsuarioView userView = new UsuarioView(usuario);
+                        userView.exibirMenu();
+                        String newOpcao = userView.lerOpcao(scanner);
+                        if (newOpcao.equals("0")) {
+                            opcao = newOpcao;
+                            System.out.println("\nEncerrando o programa...");
+                        }
+                    }
                     break;
-                case 2:
-                cadastroView.exibirFormulario();
+                case "2":
+                    cadastroView.exibirFormulario(scanner);
                     break;
-                case 0:
-                    System.out.println("Encerrando o programa...");
-                    bibliotecaView.lerOpcao().close();
+                case "0":
+                    System.out.println("\nEncerrando o programa...");
+                    scanner.close();
                     break;
                 default:
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("\nOpção inválida. Tente novamente.\n");
             }
-        } while (bibliotecaView.lerOpcao().hasNextInt() && opcao != 0);
+        } while (!opcao.equals("0"));
     }
 }
