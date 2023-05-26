@@ -12,6 +12,7 @@ public class UsuarioView {
   }
 
   public void exibirMenu() {
+    System.out.println("----- Biblioteca - Membro -----");
     System.out.printf("\n----- Olá %s -----", this.usuario.getNome());
     System.out.println();
     System.out.println("1. Novo Empréstimo");

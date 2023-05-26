@@ -1,25 +1,55 @@
 package model;
 
 public class Usuario {
-  private int id;
   private String nome;
-  private String username;
+  private String usuario;
+  private String senha;
+  private String cargo;
+  private String endereco;
+  private String email;
+  private String telefone;
+  private String status;
 
-  public Usuario(int id, String nome, String username) {
-    this.id = id;
+  public Usuario(String usuario, String nome, String senha, String cargo, String endereco,
+      String email, String telefone, String status) {
+    this.usuario = usuario;
     this.nome = nome;
-    this.username = username;
+    this.senha = senha;
+    this.cargo = cargo;
+    this.endereco = endereco;
+    this.email = email;
+    this.status = status;
+    this.telefone = telefone;
   }
 
-  public int getId() {
-    return id;
+  public String getUsuario() {
+    return this.usuario;
   }
 
   public String getNome() {
     return nome;
   }
+  public String getSenha() {
+    return this.senha;
+  }
 
-  public String getUsername() {
-    return username;
+  public String getCargo() {
+    return this.cargo;
+  }
+
+  public String getEndereco() {
+    return this.endereco;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public String getTelefone() {
+    return this.telefone;
+  }
+
+  public String getStatus() {
+    return status;
   }
 }

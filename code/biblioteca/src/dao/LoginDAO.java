@@ -35,10 +35,16 @@ public class LoginDAO {
       ResultSet rs = stmt.executeQuery();
 
       if (rs.next()) {
-        int id = rs.getInt("id");
+        String user = rs.getString("usuario");
         String nome = rs.getString("nome");
+        String senha = rs.getString("senha");
+        String cargo = rs.getString("cargo");
+        String endereco = rs.getString("endereco");
+        String email = rs.getString("email");
+        String telefone = rs.getString("telefone");
+        String status = rs.getString("status");
 
-        Usuario usuario = new Usuario(id, nome, username);
+        Usuario usuario = new Usuario(user, nome, senha,cargo,endereco,email,telefone,status);
 
         return usuario;
       }
