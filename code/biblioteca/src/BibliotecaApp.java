@@ -31,8 +31,7 @@ public class BibliotecaApp {
             switch (opcao) {
                 case "1":
                     Usuario usuario = loginView.exibirFormulario(scanner);
-                    String cargo = usuario.getCargo();
-                    if (usuario != null && cargo.equals("MEMBRO")) {
+                    if (usuario != null && usuario.getCargo().equals("MEMBRO")) {
                         String userOpcao;
                         do {
                             UsuarioView userView = new UsuarioView(usuario);
@@ -70,18 +69,25 @@ public class BibliotecaApp {
                                     System.out.println("\nEncerrando o programa...");
                                     break;
                                 case "1":
+                                adminView.boMethod("1");
                                     break;
                                 case "2":
+                                adminView.boMethod("2");
                                     break;
                                 case "3":
+                                adminView.boMethod("3");
                                     break;
                                 case "4":
+                                adminView.boMethod("4");
                                     break;
                                 case "5":
+                                adminView.boMethod("5");
                                     break;
                                 case "6":
+                                adminView.boMethod("6");
                                     break;
                                 case "7":
+                                adminView.boMethod("7");
                                     break;
                                 case "8":
                                     System.out.println("\nSaindo...");
@@ -89,7 +95,7 @@ public class BibliotecaApp {
                                 default:
                                     System.out.println("\nOpção inválida. Tente novamente.");
                             }
-                        } while (!adminOpcao.equals("0") && !adminOpcao.equals("5"));
+                        } while (!adminOpcao.equals("0") && !adminOpcao.equals("8"));
                     }
                     break;
                 case "2":

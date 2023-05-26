@@ -45,9 +45,6 @@ public class CadastroView {
             }
         }
 
-        LoginView loginView = new LoginView();
-        loginView.exibirFormulario(scanner);
-
         return true;
     }
 }

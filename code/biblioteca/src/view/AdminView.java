@@ -5,6 +5,7 @@ import model.Usuario;
 
 public class AdminView {
     private Usuario usuario;
+    private Scanner scanner;
 
     public AdminView(Usuario usuario) {
         this.usuario = usuario;
@@ -28,7 +29,33 @@ public class AdminView {
     }
 
     public String lerOpcao(Scanner scanner) {
-         return scanner.nextLine();
-        
+        this.scanner = scanner;
+        return scanner.nextLine();
     }
+
+    public void boMethod(String option) {
+        switch (option) {
+            case "1":
+                CadastroLivroView cadastroLivroView = new CadastroLivroView();
+                cadastroLivroView.exibirFormulario(scanner);
+                break;
+            case "2":
+                break;
+            case "3":
+                ExcluirLivroView excluirLivroView = new ExcluirLivroView();
+                excluirLivroView.exibirFormulario(scanner);
+                break;
+            case "4":
+                break;
+            case "5":
+                break;
+            case "6":
+                ExcluirUsuarioView excluirUsuarioView = new ExcluirUsuarioView();
+                excluirUsuarioView.exibirFormulario(scanner);
+                break;
+            case "7":
+                break;
+        }
+    }
+
 }

@@ -30,6 +30,15 @@ public class AdminBO {
         return true;
     }
 
+    public static boolean isCamposVazios(String titulo, String autor, String isbn, String anoPublicacao,
+            String categoria) {
+        return verificarCamposLivroVazios(titulo, autor, isbn, anoPublicacao, categoria);
+    }
+
+    public static boolean isLivroNaoCadastrado(String isbn) {
+        return verificarLivroNaoCadastrado(isbn);
+    }
+
     public static void atualizarLivro(String titulo, String autor, String isbn, String anoPublicacao, String categoria,
             int quantidadeDisponivel, String status) {
         AdminDAO.atualizarLivro(titulo, autor, isbn, anoPublicacao, categoria, quantidadeDisponivel, status);
@@ -55,6 +64,10 @@ public class AdminBO {
 
     public static void buscarUsuario(String usuario) {
         AdminDAO.buscarUsuario(usuario);
+    };
+
+    public static boolean isUsuarioNaoCadastrado(String usuario) {
+        return verificarLivroNaoCadastrado(usuario);
     };
 
 }

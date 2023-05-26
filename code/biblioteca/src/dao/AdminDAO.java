@@ -14,7 +14,7 @@ public class AdminDAO {
   public static boolean salvarLivro(String titulo, String autor, String isbn, String anoPublicacao,
       String categoria) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "INSERT INTO tb_usuario (titulo, autor, isbn, anoPublicacao, categoria) VALUES (?, ?, ?, ?, ?)";
+      String sql = "INSERT INTO tb_livro (titulo, autor, isbn, ano_publicacao, categoria) VALUES (?, ?, ?, ?, ?)";
       PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, titulo);
       stmt.setString(2, autor);

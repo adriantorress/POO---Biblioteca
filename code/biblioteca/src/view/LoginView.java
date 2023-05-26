@@ -13,7 +13,7 @@ public class LoginView {
 
         System.out.println("\n---- Login ----");
         System.out.println("---- 0 - Voltar ----");
-        System.out.print("Nome de usuário: ");
+        System.out.print("\nNome de usuário: ");
         username = scanner.nextLine();
         if (username.equals("0")) {
             return null;
@@ -26,7 +26,8 @@ public class LoginView {
 
         while (usuario == null) {
             System.out.println("\n---- Login ----");
-            System.out.print("Nome de usuário: ");
+            System.out.println("---- 0 - Voltar ----");
+            System.out.print("\nNome de usuário: ");
             username = scanner.nextLine();
             if (username.equals("0")) {
                 return null;
