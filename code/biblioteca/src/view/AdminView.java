@@ -4,7 +4,6 @@ import java.util.Scanner;
 import model.Usuario;
 
 public class AdminView {
-    private Scanner scanner;
     private Usuario usuario;
 
     public AdminView(Usuario usuario) {
