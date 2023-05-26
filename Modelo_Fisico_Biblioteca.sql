@@ -11,10 +11,9 @@ CREATE TABLE tb_usuario (
   cargo ENUM('MEMBRO', 'ADMINISTRADOR') DEFAULT 'MEMBRO',
   data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
   endereco VARCHAR(255) DEFAULT 'Não informado',
-  email VARCHAR(50) UNIQUE DEFAULT 'Não informado',
-  telefone VARCHAR(14) UNIQUE DEFAULT "00000000000",
-  status ENUM('ATIVO', 'INATIVO', 'SUSPENSO') DEFAULT 'ATIVO',
-  CONSTRAINT CHK_Telefone_Format CHECK (telefone REGEXP '^\\([0-9]{2}\\) (\\d{4}-\\d{4}|\\d{5}-\\d{4})$')
+  email VARCHAR(50) UNIQUE,
+  telefone VARCHAR(20) UNIQUE,
+  status ENUM('ATIVO', 'INATIVO', 'SUSPENSO') DEFAULT 'ATIVO'
 );
 
 CREATE TABLE tb_livro (
@@ -24,7 +23,7 @@ CREATE TABLE tb_livro (
   isbn VARCHAR(20) UNIQUE,
   ano_publicacao INT,
   categoria VARCHAR(30),
-  quantidade_disponivel INT,
+  quantidade_disponivel INT DEFAULT 0,
   data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
   status ENUM('DISPONIVEL', 'INDISPONIVEL') DEFAULT 'DISPONIVEL'
 );

@@ -10,8 +10,8 @@ import model.Usuario;
 
 public class LoginDAO {
   private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
-  private static final String USUARIO = "";
-  private static final String SENHA = "";
+  private static final String USUARIO = "root";
+  private static final String SENHA = "#241258Aj";
 
   public static boolean verificarCredenciais(String username, String password) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {

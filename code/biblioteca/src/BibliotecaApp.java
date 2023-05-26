@@ -31,7 +31,8 @@ public class BibliotecaApp {
             switch (opcao) {
                 case "1":
                     Usuario usuario = loginView.exibirFormulario(scanner);
-                    if (usuario != null && usuario.getCargo() == "MEMBRO") {
+                    String cargo = usuario.getCargo();
+                    if (usuario != null && cargo.equals("MEMBRO")) {
                         UsuarioView userView = new UsuarioView(usuario);
                         userView.exibirMenu();
                         String newOpcao = userView.lerOpcao(scanner);
@@ -39,7 +40,7 @@ public class BibliotecaApp {
                             opcao = newOpcao;
                             System.out.println("\nEncerrando o programa...");
                         }
-                    } else if (usuario != null && usuario.getCargo() == "ADMINISTRADOR") {
+                    } else if (usuario != null && usuario.getCargo().equals("ADMINISTRADOR")) {
                         AdminView adminView = new AdminView(usuario);
                         adminView.exibirMenu();
                         String newOpcao = adminView.lerOpcao(scanner);

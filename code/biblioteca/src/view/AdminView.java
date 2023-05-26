@@ -11,8 +11,9 @@ public class AdminView {
     }
 
     public void exibirMenu() {
-        System.out.println("----- Biblioteca - Administração -----");
+        System.out.println("\n----- Biblioteca - Administração -----");
         System.out.printf("\n----- Olá %s -----", this.usuario.getNome());
+        System.out.println();
         System.out.println();
         System.out.println("1. Cadastrar livro");
         System.out.println("2. Atualizar livro");
@@ -23,7 +24,7 @@ public class AdminView {
         System.out.println("4. Buscar usuário");
         System.out.println("5. Deslogar");
         System.out.println("0. Finalizar Programa");
-        System.out.print("Escolha uma opção: ");
+        System.out.print("\nEscolha uma opção: ");
     }
 
     public String lerOpcao(Scanner scanner) {
