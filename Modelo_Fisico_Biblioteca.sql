@@ -7,33 +7,14 @@ CREATE TABLE tb_usuario (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nome VARCHAR(50) NOT NULL,
   usuario VARCHAR(50) UNIQUE NOT NULL,
-  senha VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE tb_bibliotecario (
-  usuario_id INT PRIMARY KEY,
-  cargo VARCHAR(20),
-  FOREIGN KEY (usuario_id) REFERENCES tb_usuario (id)
-);
-
-CREATE TABLE tb_membro (
-  usuario_id INT PRIMARY KEY,
-  endereco VARCHAR(255),
-  email VARCHAR(50) UNIQUE,
-  telefone VARCHAR(14) UNIQUE,
-  data_inscricao DATE,
-  status ENUM('ativo', 'inativo', 'suspenso'),
-  FOREIGN KEY (usuario_id) REFERENCES tb_usuario (id),
+  senha VARCHAR(50) NOT NULL,
+  cargo ENUM('MEMBRO', 'ADMINISTRADOR') DEFAULT 'MEMBRO',
+  data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
+  endereco VARCHAR(255) DEFAULT 'Não informado',
+  email VARCHAR(50) UNIQUE DEFAULT 'Não informado',
+  telefone VARCHAR(14) UNIQUE DEFAULT "00000000000",
+  status ENUM('ATIVO', 'INATIVO', 'SUSPENSO') DEFAULT 'ATIVO',
   CONSTRAINT CHK_Telefone_Format CHECK (telefone REGEXP '^\\([0-9]{2}\\) (\\d{4}-\\d{4}|\\d{5}-\\d{4})$')
-);
-
-CREATE TABLE tb_historico_cadastro_membro (
-  bibliotecario_id INT,
-  membro_id INT,
-  data_cadastro DATE,
-  FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
-  FOREIGN KEY (membro_id) REFERENCES tb_membro (usuario_id),
-  PRIMARY KEY (bibliotecario_id,membro_id)
 );
 
 CREATE TABLE tb_livro (
@@ -44,34 +25,16 @@ CREATE TABLE tb_livro (
   ano_publicacao INT,
   categoria VARCHAR(30),
   quantidade_disponivel INT,
-  status ENUM('disponivel', 'indisponivel')
-);
-
-CREATE TABLE tb_historico_cadastro_livro (
-  bibliotecario_id INT,
-  livro_id INT,
-  data_cadastro DATE,
-  FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
-  FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
-  PRIMARY KEY (bibliotecario_id,livro_id)
+  data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
+  status ENUM('DISPONIVEL', 'INDISPONIVEL') DEFAULT 'DISPONIVEL'
 );
 
 CREATE TABLE tb_emprestimo (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  data_emprestimo DATE,
-  data_devolucao DATE,
-  status ENUM('Em andamento', 'Finalizado', 'Cancelado', 'Atrasado')
+  usuario_id INT,
+  livro_id INT,
+  data_emprestimo DATE NOT NULL DEFAULT (CURRENT_DATE),
+  data_devolucao DATE NOT NULL,
+  FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
+  status ENUM('EM ANDAMENTO', 'FINALIZADO', 'CANCELADO', 'ATRASADO') NOT NULL DEFAULT 'EM ANDAMENTO'
 );
-
-CREATE TABLE tb_historico_emprestimo (
-	bibliotecario_id INT,
-    membro_id INT,
-    livro_id INT,
-    emprestimo_id INT,
-    FOREIGN KEY (bibliotecario_id) REFERENCES tb_bibliotecario (usuario_id),
-    FOREIGN KEY (membro_id) REFERENCES tb_membro (usuario_id),
-    FOREIGN KEY (emprestimo_id) REFERENCES tb_emprestimo (id),
-    FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
-    PRIMARY KEY (bibliotecario_id,membro_id,livro_id,emprestimo_id)
-);
-
