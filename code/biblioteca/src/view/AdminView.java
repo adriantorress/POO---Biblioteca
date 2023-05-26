@@ -19,15 +19,16 @@ public class AdminView {
         System.out.println("2. Atualizar livro");
         System.out.println("3. Excluir livro");
         System.out.println("4. Buscar livro");
-        System.out.println("2. Atualizar usuário");
-        System.out.println("3. Excluir usuário");
-        System.out.println("4. Buscar usuário");
-        System.out.println("5. Deslogar");
+        System.out.println("5. Atualizar usuário");
+        System.out.println("6. Excluir usuário");
+        System.out.println("7. Buscar usuário");
+        System.out.println("8. Deslogar");
         System.out.println("0. Finalizar Programa");
         System.out.print("\nEscolha uma opção: ");
     }
 
     public String lerOpcao(Scanner scanner) {
-        return scanner.nextLine();
+         return scanner.nextLine();
+        
     }
 }

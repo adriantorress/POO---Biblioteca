@@ -33,21 +33,63 @@ public class BibliotecaApp {
                     Usuario usuario = loginView.exibirFormulario(scanner);
                     String cargo = usuario.getCargo();
                     if (usuario != null && cargo.equals("MEMBRO")) {
-                        UsuarioView userView = new UsuarioView(usuario);
-                        userView.exibirMenu();
-                        String newOpcao = userView.lerOpcao(scanner);
-                        if (newOpcao.equals("0")) {
-                            opcao = newOpcao;
-                            System.out.println("\nEncerrando o programa...");
-                        }
+                        String userOpcao;
+                        do {
+                            UsuarioView userView = new UsuarioView(usuario);
+                            userView.exibirMenu();
+                            userOpcao = userView.lerOpcao(scanner);
+                            switch (userOpcao) {
+                                case "0":
+                                    opcao = userOpcao;
+                                    System.out.println("\nEncerrando o programa...");
+                                    break;
+                                case "1":
+                                    break;
+                                case "2":
+                                    break;
+                                case "3":
+                                    break;
+                                case "4":
+                                    break;
+                                case "5":
+                                    System.out.println("\nSaindo...");
+                                    break;
+                                default:
+                                    System.out.println("\nOpção inválida. Tente novamente.");
+                            }
+                        } while (!userOpcao.equals("0") && !userOpcao.equals("5"));
                     } else if (usuario != null && usuario.getCargo().equals("ADMINISTRADOR")) {
-                        AdminView adminView = new AdminView(usuario);
-                        adminView.exibirMenu();
-                        String newOpcao = adminView.lerOpcao(scanner);
-                        if (newOpcao.equals("0")) {
-                            opcao = newOpcao;
-                            System.out.println("\nEncerrando o programa...");
-                        }
+                        String adminOpcao;
+                        do {
+                            AdminView adminView = new AdminView(usuario);
+                            adminView.exibirMenu();
+                            adminOpcao = adminView.lerOpcao(scanner);
+                            switch (adminOpcao) {
+                                case "0":
+                                    opcao = adminOpcao;
+                                    System.out.println("\nEncerrando o programa...");
+                                    break;
+                                case "1":
+                                    break;
+                                case "2":
+                                    break;
+                                case "3":
+                                    break;
+                                case "4":
+                                    break;
+                                case "5":
+                                    break;
+                                case "6":
+                                    break;
+                                case "7":
+                                    break;
+                                case "8":
+                                    System.out.println("\nSaindo...");
+                                    break;
+                                default:
+                                    System.out.println("\nOpção inválida. Tente novamente.");
+                            }
+                        } while (!adminOpcao.equals("0") && !adminOpcao.equals("5"));
                     }
                     break;
                 case "2":
