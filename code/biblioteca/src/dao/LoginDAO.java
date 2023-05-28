@@ -37,14 +37,13 @@ public class LoginDAO {
       if (rs.next()) {
         String user = rs.getString("usuario");
         String nome = rs.getString("nome");
-        String senha = rs.getString("senha");
         String cargo = rs.getString("cargo");
         String endereco = rs.getString("endereco");
         String email = rs.getString("email");
         String telefone = rs.getString("telefone");
         String status = rs.getString("status");
 
-        Usuario usuario = new Usuario(user, nome, senha,cargo,endereco,email,telefone,status);
+        Usuario usuario = new Usuario(user, nome,cargo,endereco,email,telefone,status);
 
         return usuario;
       }

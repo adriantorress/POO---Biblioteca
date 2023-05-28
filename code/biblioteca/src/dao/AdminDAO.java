@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Usuario;
+import model.Livro;
 
 public class AdminDAO {
   private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
@@ -78,18 +80,31 @@ public class AdminDAO {
     }
   }
 
-  public static boolean buscarLivro(String isbn) {
+  public static Livro buscarLivro(String isbn) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "SELECT titulo, autor, isbn, anoPublicacao, categoria, quantidadeDisponivel, status FROM tb_livro WHERE isbn = ?;";
+      String sql = "SELECT titulo, autor, ano_publicacao, categoria, quantidade_disponivel, data_cadastro,status FROM tb_livro WHERE isbn = ?;";
       PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, isbn);
-      stmt.executeUpdate();
+      ResultSet rs = stmt.executeQuery();
       System.out.println("\nBusca concluída com sucesso!");
-      return true;
+
+      if (rs.next()) {
+        String titulo = rs.getString("titulo");
+        String autor = rs.getString("autor");
+        String anoPublicacao = rs.getString("ano_publicacao");
+        String categoria = rs.getString("categoria");
+        String data_cadastro = rs.getString("data_cadastro");
+        String quantidadeDisponivel = rs.getString("quantidade_disponivel");
+        String status = rs.getString("status");
+
+        Livro livro = new Livro(titulo, autor, anoPublicacao, categoria, quantidadeDisponivel, data_cadastro, status);
+
+        return livro;
+      }
     } catch (SQLException e) {
-      System.out.println("\nErro ao buscar Livro: " + e.getMessage());
-      return false;
+      System.out.println("Erro ao obter usuário: " + e.getMessage());
     }
+    return null;
   }
 
   public static boolean atualizarUsuario(String usuario, String nome, String senha, String cargo, String endereco,
@@ -114,30 +129,56 @@ public class AdminDAO {
     }
   }
 
-  public static boolean excluirUsuario(String isbn) {
+  public static boolean excluirUsuario(String usuario) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "DELETE FROM tb_livro WHERE isbn = ?;";
+      String sql = "DELETE FROM tb_usuario WHERE usuario = ?;";
       PreparedStatement stmt = conn.prepareStatement(sql);
-      stmt.setString(1, isbn);
+      stmt.setString(1, usuario);
       stmt.executeUpdate();
-      System.out.println("\nLivro excluido com sucesso!");
+      System.out.println("\nUsuario excluido com sucesso!");
       return true;
     } catch (SQLException e) {
-      System.out.println("\nErro ao excluir Livro: " + e.getMessage());
+      System.out.println("\nErro ao excluir Usuario: " + e.getMessage());
       return false;
     }
   }
 
-  public static boolean buscarUsuario(String isbn) {
+  public static Usuario buscarUsuario(String username) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "SELECT titulo, autor, isbn, anoPublicacao, categoria, quantidadeDisponivel, status FROM tb_livro WHERE isbn = ?;";
+      String sql = "SELECT usuario, nome, senha, cargo, endereco, email, telefone,status FROM tb_usuario WHERE usuario = ?;";
       PreparedStatement stmt = conn.prepareStatement(sql);
-      stmt.setString(1, isbn);
-      stmt.executeUpdate();
+      stmt.setString(1, username);
+      ResultSet rs = stmt.executeQuery();
       System.out.println("\nBusca concluída com sucesso!");
-      return true;
+
+      if (rs.next()) {
+        String user = rs.getString("usuario");
+        String nome = rs.getString("nome");
+        String cargo = rs.getString("cargo");
+        String endereco = rs.getString("endereco");
+        String email = rs.getString("email");
+        String telefone = rs.getString("telefone");
+        String status = rs.getString("status");
+
+        Usuario usuario = new Usuario(user, nome, cargo, endereco, email, telefone, status);
+
+        return usuario;
+      }
     } catch (SQLException e) {
-      System.out.println("\nErro ao buscar Livro: " + e.getMessage());
+      System.out.println("Erro ao obter usuário: " + e.getMessage());
+    }
+    return null;
+  }
+
+  public static boolean verificarUsuarioCadastrado(String usuario) {
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = "SELECT * FROM tb_usuario WHERE usuario = ?";
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, usuario);
+      ResultSet rs = stmt.executeQuery();
+      return rs.next();
+    } catch (SQLException e) {
+      System.out.println("\nErro ao verificar usuario: " + e.getMessage());
       return false;
     }
   }

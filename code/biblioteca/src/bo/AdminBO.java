@@ -1,6 +1,8 @@
 package bo;
 
 import dao.AdminDAO;
+import model.Usuario;
+import model.Livro;
 
 public class AdminBO {
 
@@ -48,9 +50,13 @@ public class AdminBO {
         AdminDAO.excluirLivro(isbn);
     }
 
-    public static void buscarLivro(String isbn) {
-        AdminDAO.buscarLivro(isbn);
-    }
+    public static Livro buscarLivro(String livro) {
+        boolean isLivroNaoCadastrado = verificarLivroNaoCadastrado(livro);
+        if (!isLivroNaoCadastrado) {
+            return AdminDAO.buscarLivro(livro);
+        }
+        return null;
+    };
 
     public static void atualizarUsuario(String usuario, String nome, String senha, String cargo, String endereco,
             String email, String telefone, String status) {
@@ -62,12 +68,23 @@ public class AdminBO {
         AdminDAO.excluirUsuario(usuario);
     }
 
-    public static void buscarUsuario(String usuario) {
-        AdminDAO.buscarUsuario(usuario);
+    public static boolean isUsuarioNaoCadastrado(String usuario) {
+        return verificarUsuarioNaoCadastrado(usuario);
     };
 
-    public static boolean isUsuarioNaoCadastrado(String usuario) {
-        return verificarLivroNaoCadastrado(usuario);
+    private static boolean verificarUsuarioNaoCadastrado(String usuario) {
+        if (AdminDAO.verificarUsuarioCadastrado(usuario)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static Usuario buscarUsuario(String usuario) {
+        boolean isUsuarioNaoCadastrado = verificarUsuarioNaoCadastrado(usuario);
+        if (!isUsuarioNaoCadastrado) {
+            return AdminDAO.buscarUsuario(usuario);
+        }
+        return null;
     };
 
 }

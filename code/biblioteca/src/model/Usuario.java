@@ -3,18 +3,16 @@ package model;
 public class Usuario {
   private String nome;
   private String usuario;
-  private String senha;
   private String cargo;
   private String endereco;
   private String email;
   private String telefone;
   private String status;
 
-  public Usuario(String usuario, String nome, String senha, String cargo, String endereco,
+  public Usuario(String usuario, String nome, String cargo, String endereco,
       String email, String telefone, String status) {
     this.usuario = usuario;
     this.nome = nome;
-    this.senha = senha;
     this.cargo = cargo;
     this.endereco = endereco;
     this.email = email;
@@ -28,9 +26,6 @@ public class Usuario {
 
   public String getNome() {
     return nome;
-  }
-  public String getSenha() {
-    return this.senha;
   }
 
   public String getCargo() {

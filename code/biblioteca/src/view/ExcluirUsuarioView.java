@@ -18,15 +18,15 @@ public class ExcluirUsuarioView {
     boolean isCamposVazios = usuario.isEmpty();
     boolean isUsuarioNaoCadastrado = AdminBO.isUsuarioNaoCadastrado(usuario);
 
-    if (!isCamposVazios && !isUsuarioNaoCadastrado) {
+    if (!isCamposVazios && isUsuarioNaoCadastrado) {
       AdminBO.excluirUsuario(usuario);
     }
 
-    while (!(isCamposVazios && !isUsuarioNaoCadastrado)) {
-      System.out.println("\n---- Excluir Livro ----");
+    while (!(isCamposVazios && isUsuarioNaoCadastrado)) {
+      System.out.println("\n---- Excluir Usuario ----");
       System.out.println("---- 0 - Voltar ----");
 
-      System.out.print("ISBN: ");
+      System.out.print("Usuario: ");
       usuario = scanner.nextLine();
       if (usuario.equals("0")) {
         return false;
@@ -35,7 +35,7 @@ public class ExcluirUsuarioView {
       isCamposVazios = usuario.isEmpty();
       isUsuarioNaoCadastrado = AdminBO.isUsuarioNaoCadastrado(usuario);
 
-      if (!isCamposVazios && !isUsuarioNaoCadastrado) {
+      if (!isCamposVazios && isUsuarioNaoCadastrado) {
         AdminBO.excluirUsuario(usuario);
       }
     }
