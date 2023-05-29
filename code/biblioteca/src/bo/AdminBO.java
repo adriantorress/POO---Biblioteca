@@ -21,9 +21,12 @@ public class AdminBO {
         return false;
     }
 
-    public static void atualizarLivro(String titulo, String autor, String isbn, String anoPublicacao, String categoria,
-            int quantidadeDisponivel, String status) {
-        AdminDAO.atualizarLivro(titulo, autor, isbn, anoPublicacao, categoria, quantidadeDisponivel, status);
+    public static void atualizarLivro(String isbn, String atributo, String novoValor) {
+        AdminDAO.atualizarLivro(isbn, atributo, novoValor);
+    }
+
+    public static void atualizarLivro(String isbn, String atributo, int novoValor) {
+        AdminDAO.atualizarLivro(isbn, atributo, novoValor);
     }
 
     public static void excluirLivro(String isbn) {
@@ -38,11 +41,10 @@ public class AdminBO {
         return null;
     };
 
-    public static void atualizarUsuario(String usuario, String nome, String senha, String cargo, String endereco,
-            String email, String telefone, String status) {
-        AdminDAO.atualizarUsuario(usuario, nome, senha, cargo, endereco, email, telefone,
-                status);
+    public static void atualizarUsuario(String usuario, String atributo, String novoValor) {
+        AdminDAO.atualizarUsuario(usuario, atributo, novoValor);
     }
+
 
     public static void excluirUsuario(String usuario) {
         AdminDAO.excluirUsuario(usuario);

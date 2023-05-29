@@ -45,18 +45,27 @@ public class AdminDAO {
     }
   }
 
-  public static boolean atualizarLivro(String titulo, String autor, String isbn, String anoPublicacao,
-      String categoria, int quantidade_disponivel, String status) {
+  public static boolean atualizarLivro(String isbn, String atributo, String novoValor) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "UPDATE tb_livro SET titulo = ?, autor = ?, isbn = ?, ano_publicacao = ?, categoria = ?, quantidade_disponivel = ?, status = ? WHERE isbn = ?";
+      String sql = String.format("UPDATE tb_livro SET %s = ? WHERE isbn = ?", atributo);
       PreparedStatement stmt = conn.prepareStatement(sql);
-      stmt.setString(1, titulo);
-      stmt.setString(2, autor);
-      stmt.setString(3, isbn);
-      stmt.setString(4, anoPublicacao);
-      stmt.setString(5, categoria);
-      stmt.setInt(6, quantidade_disponivel);
-      stmt.setString(7, status);
+      stmt.setString(1, novoValor);
+      stmt.setString(2, isbn);
+      stmt.executeUpdate();
+      System.out.println("\nLivro atualizado com sucesso!");
+      return true;
+    } catch (SQLException e) {
+      System.out.println("\nErro ao atualizar Livro: " + e.getMessage());
+      return false;
+    }
+  }
+
+  public static boolean atualizarLivro(String isbn, String atributo, int novoValor) {
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = String.format("UPDATE tb_livro SET %s = ? WHERE isbn = ?", atributo);
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setInt(1, novoValor);
+      stmt.setString(2, isbn);
       stmt.executeUpdate();
       System.out.println("\nLivro atualizado com sucesso!");
       return true;
@@ -107,21 +116,14 @@ public class AdminDAO {
     return null;
   }
 
-  public static boolean atualizarUsuario(String usuario, String nome, String senha, String cargo, String endereco,
-      String email, String telefone, String status) {
+  public static boolean atualizarUsuario(String usuario, String atributo, String novoValor) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
-      String sql = "UPDATE tb_livro SET nome = ?, senha = ?, cargo = ?, endereco = ?, email = ?, telefone = ?, status = ? WHERE usuario = ?";
+      String sql = String.format("UPDATE tb_usuario SET %s = ? WHERE usuario = ?", atributo);
       PreparedStatement stmt = conn.prepareStatement(sql);
-      stmt.setString(1, nome);
-      stmt.setString(2, senha);
-      stmt.setString(3, cargo);
-      stmt.setString(4, endereco);
-      stmt.setString(5, email);
-      stmt.setString(6, telefone);
-      stmt.setString(7, status);
-      stmt.setString(8, usuario);
+      stmt.setString(1, novoValor);
+      stmt.setString(2, usuario);
       stmt.executeUpdate();
-      System.out.println("\nLivro atualizado com sucesso!");
+      System.out.println("\nUsuario atualizado com sucesso!");
       return true;
     } catch (SQLException e) {
       System.out.println("\nErro ao atualizar Livro: " + e.getMessage());
