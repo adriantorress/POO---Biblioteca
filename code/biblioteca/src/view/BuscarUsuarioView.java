@@ -7,40 +7,28 @@ import model.Usuario;
 public class BuscarUsuarioView {
 
   public Usuario exibirFormulario(Scanner scanner) {
-    System.out.println("\n---- Buscar Usuário ----");
-    System.out.println("---- 0 - Voltar ----");
-
-    System.out.print("Usuário: ");
-    String usuario = scanner.nextLine();
-    if (usuario.equals("0")) {
-      return null;
-    }
-
-    boolean isCamposVazios = usuario.isEmpty();
-  
-
-    if (!isCamposVazios) {
-      return AdminBO.buscarUsuario(usuario);
-    }
-
-    while (!isCamposVazios) {
-      System.out.println("\n---- Buscar Usuario ----");
+    boolean isCamposVazios;
+    String usuario;
+    boolean isUsuarioCadastrado;
+    do {
+      System.out.println("\n---- Buscar Usuário ----");
       System.out.println("---- 0 - Voltar ----");
 
-      System.out.print("Usuario: ");
+      System.out.print("\nUsuário: ");
       usuario = scanner.nextLine();
       if (usuario.equals("0")) {
         return null;
       }
 
       isCamposVazios = usuario.isEmpty();
+      isUsuarioCadastrado = AdminBO.verificarUsuarioCadastrado(usuario);
+      if (isCamposVazios)
+        System.out.println("\nPreencha o campo...");
+      else if (!isUsuarioCadastrado)
+        System.out.println("\nUsuário não encontrado!");
 
+    } while (isCamposVazios || !isUsuarioCadastrado);
 
-      if (!isCamposVazios) {
-        return AdminBO.buscarUsuario(usuario);
-      }
-    }
-    
     return AdminBO.buscarUsuario(usuario);
 
   }

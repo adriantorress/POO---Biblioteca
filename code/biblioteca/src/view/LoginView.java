@@ -1,30 +1,18 @@
 package view;
 
-import bo.LoginBO;
+import bo.UsuarioBO;
 import model.Usuario;
 
 import java.util.Scanner;
 
 public class LoginView {
 
-    String username;
-
     public Usuario exibirFormulario(Scanner scanner) {
-
-        System.out.println("\n---- Login ----");
-        System.out.println("---- 0 - Voltar ----");
-        System.out.print("\nNome de usuário: ");
-        username = scanner.nextLine();
-        if (username.equals("0")) {
-            return null;
-        }
-        ;
-        System.out.print("Senha: ");
-        String password = scanner.nextLine();
-
-        Usuario usuario = LoginBO.realizarLogin(username, password);
-
-        while (usuario == null) {
+        String password;
+        String username;
+        boolean isCamposVazios;
+        boolean isUsuarioCadastrado;
+        do {
             System.out.println("\n---- Login ----");
             System.out.println("---- 0 - Voltar ----");
             System.out.print("\nNome de usuário: ");
@@ -35,10 +23,22 @@ public class LoginView {
             ;
             System.out.print("Senha: ");
             password = scanner.nextLine();
-            usuario = LoginBO.realizarLogin(username, password);
-        }
 
-        return usuario;
+            isCamposVazios = username.isEmpty() || password.isEmpty();
+            isUsuarioCadastrado = UsuarioBO.verificarCredenciais(username,password);
+
+            if (isCamposVazios) {
+                System.out.println("\nUsuário ou senha não preenchidos, tente novamente...");
+            }
+
+            else if (!isUsuarioCadastrado) {
+                System.out.println("\nUsuário ou Senha inválido. Tente novamente.");
+            }
+
+        } while (isCamposVazios || !isUsuarioCadastrado);
+        
+        System.out.println("\nLogin realizado com sucesso!");
+        return UsuarioBO.realizarLogin(username, password);
 
     }
 

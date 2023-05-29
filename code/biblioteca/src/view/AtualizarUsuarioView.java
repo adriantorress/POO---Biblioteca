@@ -1,21 +1,21 @@
 package view;
+
 import java.util.Scanner;
 import bo.AdminBO;
-import model.Livro;
+import model.Usuario;
 
-
-public class AtualizarLivroView {
+public class AtualizarUsuarioView {
 
   public String exibirMenu(Scanner scanner) {
-    System.out.println("\n----- Atualizar - Livro -----");
+    System.out.println("\n----- Atualizar - Usuário -----");
     System.out.println("---- 0 - Voltar ----");
     System.out.println();
-    System.out.println("1. Atualizar Titulo");
-    System.out.println("2. Atualizar Autor");
+    System.out.println("1. Atualizar Nome");
+    System.out.println("2. Atualizar Username");
     System.out.println("3. Atualizar Cargo");
-    System.out.println("4. Atualizar Isbn");
-    System.out.println("5. Atualizar Ano de Publicacao");
-    System.out.println("6. Atualizar Quantidade Disponivel");
+    System.out.println("4. Atualizar Endereco");
+    System.out.println("5. Atualizar Email");
+    System.out.println("6. Atualizar Telefone");
     System.out.println("7. Atualizar Status");
     System.out.print("\nEscolha uma opção: ");
 
@@ -23,36 +23,36 @@ public class AtualizarLivroView {
     return opcao;
   }
 
-  public Livro exibirFormulario(Scanner scanner) {
+  public Usuario exibirFormulario(Scanner scanner) {
     String opcao;
     boolean isCamposVazios;
-    boolean isLivroCadastrado;
-    String livro;
+    boolean isUsuarioCadastrado;
+    String usuario;
 
     do {
-      System.out.println("\n---- Atualizar Livro ----");
+      System.out.println("\n---- Atualizar Usuário ----");
       System.out.println("---- 0 - Voltar ----");
 
-      System.out.print("\nISBN do Livro: ");
-      livro = scanner.nextLine();
-      if (livro.equals("0")) {
+      System.out.print("\nUsuário: ");
+      usuario = scanner.nextLine();
+      if (usuario.equals("0")) {
         return null;
       }
 
-      isCamposVazios = livro.isEmpty();
-      isLivroCadastrado = AdminBO.verificarLivroCadastrado(livro);
+      isCamposVazios = usuario.isEmpty();
+      isUsuarioCadastrado = AdminBO.isUsuarioCadastrado(usuario);
 
       if (isCamposVazios) {
         System.out.println("\nPreencha o campo!");
       }
 
-      else if (!isLivroCadastrado) {
-        System.out.println("\nLivro não encontrado!");
+      else if (!isUsuarioCadastrado) {
+        System.out.println("\nUsuário não encontrado!");
       }
-    } while (isCamposVazios || !isLivroCadastrado);
+    } while (isCamposVazios || !isUsuarioCadastrado);
 
     do {
-    if (!isCamposVazios && isLivroCadastrado) {
+    if (!isCamposVazios && isUsuarioCadastrado) {
       opcao = exibirMenu(scanner);
       switch (opcao) {
         case "0":
@@ -76,9 +76,9 @@ public class AtualizarLivroView {
       }
     }
 
-  } while (!isCamposVazios && isLivroCadastrado);
+  } while (!isCamposVazios && isUsuarioCadastrado);
 
-    return AdminBO.buscarLivro(livro);
+    return AdminBO.buscarUsuario(usuario);
 
   }
 }

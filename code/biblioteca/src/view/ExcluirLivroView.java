@@ -5,41 +5,35 @@ import bo.AdminBO;
 
 public class ExcluirLivroView {
 
-  public boolean exibirFormulario(Scanner scanner) {
-    System.out.println("\n---- Excluir Livro ----");
-    System.out.println("---- 0 - Voltar ----");
+  public void exibirFormulario(Scanner scanner) {
+    boolean isCamposVazios;
+    boolean isLivroCadastrado;
+    String isbn;
 
-    System.out.print("ISBN: ");
-    String isbn = scanner.nextLine();
-    if (isbn.equals("0")) {
-      return false;
-    }
-
-    boolean isCamposVazios = isbn.isEmpty();
-    boolean isLivroNaoCadastrado = AdminBO.isLivroNaoCadastrado(isbn);
-
-    if (!isCamposVazios && !isLivroNaoCadastrado) {
-      AdminBO.excluirLivro(isbn);
-    }
-
-    while (!(isCamposVazios && !isLivroNaoCadastrado)) {
+    do {
       System.out.println("\n---- Excluir Livro ----");
       System.out.println("---- 0 - Voltar ----");
 
       System.out.print("ISBN: ");
       isbn = scanner.nextLine();
       if (isbn.equals("0")) {
-        return false;
+        break;
       }
 
       isCamposVazios = isbn.isEmpty();
-      isLivroNaoCadastrado = AdminBO.isLivroNaoCadastrado(isbn);
+      isLivroCadastrado = AdminBO.verificarLivroCadastrado(isbn);
 
-      if (!isCamposVazios && !isLivroNaoCadastrado) {
-        AdminBO.excluirLivro(isbn);
+      if (isCamposVazios) {
+        System.out.println("\nPreencha o campo!");
       }
-    }
-    return true;
+      else if (!isLivroCadastrado) {
+        System.out.println("\nLivro não encontrado!");
+      }
+
+    } while (isCamposVazios || !isLivroCadastrado);
+
+    if (!isbn.equals("0"))
+      AdminBO.excluirLivro(isbn);
 
   }
 }

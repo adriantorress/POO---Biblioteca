@@ -13,21 +13,11 @@ public class BibliotecaApp {
         BibliotecaView bibliotecaView = new BibliotecaView();
         LoginView loginView = new LoginView();
         CadastroView cadastroView = new CadastroView();
-
         Scanner scanner = new Scanner(System.in);
         String opcao;
 
         do {
-            bibliotecaView.exibirMenu();
-
-            while (!scanner.hasNextInt()) {
-                System.out.println("\nOpção inválida. Tente novamente.");
-                bibliotecaView.exibirMenu();
-                scanner.next();
-            }
-
-            opcao = scanner.nextLine();
-
+            opcao = bibliotecaView.exibirMenu(scanner);
             switch (opcao) {
                 case "1":
                     Usuario usuario = loginView.exibirFormulario(scanner);
@@ -35,8 +25,7 @@ public class BibliotecaApp {
                         String userOpcao;
                         do {
                             UsuarioView userView = new UsuarioView(usuario);
-                            userView.exibirMenu();
-                            userOpcao = userView.lerOpcao(scanner);
+                            userOpcao = userView.exibirMenu(scanner);
                             switch (userOpcao) {
                                 case "0":
                                     opcao = userOpcao;
@@ -61,8 +50,7 @@ public class BibliotecaApp {
                         String adminOpcao;
                         do {
                             AdminView adminView = new AdminView(usuario);
-                            adminView.exibirMenu();
-                            adminOpcao = adminView.lerOpcao(scanner);
+                            adminOpcao = adminView.exibirMenu(scanner);
                             switch (adminOpcao) {
                                 case "0":
                                     opcao = adminOpcao;

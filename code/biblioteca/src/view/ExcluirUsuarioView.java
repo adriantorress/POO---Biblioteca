@@ -5,41 +5,35 @@ import bo.AdminBO;
 
 public class ExcluirUsuarioView {
 
-  public boolean exibirFormulario(Scanner scanner) {
-    System.out.println("\n---- Excluir Usuário ----");
-    System.out.println("---- 0 - Voltar ----");
-
-    System.out.print("Usuário: ");
-    String usuario = scanner.nextLine();
-    if (usuario.equals("0")) {
-      return false;
-    }
-
-    boolean isCamposVazios = usuario.isEmpty();
-    boolean isUsuarioNaoCadastrado = AdminBO.isUsuarioNaoCadastrado(usuario);
-
-    if (!isCamposVazios && isUsuarioNaoCadastrado) {
-      AdminBO.excluirUsuario(usuario);
-    }
-
-    while (!(isCamposVazios && isUsuarioNaoCadastrado)) {
-      System.out.println("\n---- Excluir Usuario ----");
+  public void exibirFormulario(Scanner scanner) {
+    boolean isCamposVazios;
+    boolean isUsuarioCadastrado;
+    String usuario;
+    do {
+      System.out.println("\n---- Excluir Usuário ----");
       System.out.println("---- 0 - Voltar ----");
 
-      System.out.print("Usuario: ");
+      System.out.print("Usuário: ");
       usuario = scanner.nextLine();
       if (usuario.equals("0")) {
-        return false;
+        break;
       }
 
       isCamposVazios = usuario.isEmpty();
-      isUsuarioNaoCadastrado = AdminBO.isUsuarioNaoCadastrado(usuario);
+      isUsuarioCadastrado = AdminBO.isUsuarioCadastrado(usuario);
 
-      if (!isCamposVazios && isUsuarioNaoCadastrado) {
-        AdminBO.excluirUsuario(usuario);
+      if (isCamposVazios) {
+        System.out.println("\nPreencha o campo!");
       }
-    }
-    return true;
+
+      else if (!isUsuarioCadastrado) {
+        System.out.println("\nUsuário não encontrado!");
+      }
+
+    } while (isCamposVazios || !isUsuarioCadastrado);
+
+    if (!usuario.equals("0"))
+      AdminBO.excluirUsuario(usuario);
 
   }
 }

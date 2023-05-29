@@ -12,26 +12,35 @@ public class AdminView {
         this.usuario = usuario;
     }
 
-    public void exibirMenu() {
-        System.out.println("\n----- Biblioteca - Administração -----");
-        System.out.printf("\n----- Olá %s -----", this.usuario.getNome());
-        System.out.println();
-        System.out.println();
-        System.out.println("1. Cadastrar livro");
-        System.out.println("2. Atualizar livro");
-        System.out.println("3. Excluir livro");
-        System.out.println("4. Buscar livro");
-        System.out.println("5. Atualizar usuário");
-        System.out.println("6. Excluir usuário");
-        System.out.println("7. Buscar usuário");
-        System.out.println("8. Deslogar");
-        System.out.println("0. Finalizar Programa");
-        System.out.print("\nEscolha uma opção: ");
-    }
+    public String exibirMenu(Scanner scanner) {
+        String opcao;
+        boolean isCamposVazios;
+        do {
+            System.out.println("\n----- Biblioteca - Administração -----");
+            System.out.printf("\n----- Olá %s -----", this.usuario.getNome());
+            System.out.println();
+            System.out.println();
+            System.out.println("1. Cadastrar livro");
+            System.out.println("2. Atualizar livro");
+            System.out.println("3. Excluir livro");
+            System.out.println("4. Buscar livro");
+            System.out.println("5. Atualizar usuário");
+            System.out.println("6. Excluir usuário");
+            System.out.println("7. Buscar usuário");
+            System.out.println("8. Deslogar");
+            System.out.println("0. Finalizar Programa");
+            System.out.print("\nEscolha uma opção: ");
 
-    public String lerOpcao(Scanner scanner) {
+            opcao = scanner.nextLine();
+
+            isCamposVazios = opcao.isEmpty();
+
+            if (isCamposVazios) {
+                System.out.println("\nSelecione algo...");
+            }
+        } while (isCamposVazios);
         this.scanner = scanner;
-        return scanner.nextLine();
+        return opcao;
     }
 
     public void boMethod(String option) {
@@ -41,6 +50,8 @@ public class AdminView {
                 cadastroLivroView.exibirFormulario(scanner);
                 break;
             case "2":
+                AtualizarLivroView atualizarLivroView = new AtualizarLivroView();
+                atualizarLivroView.exibirFormulario(scanner);
                 break;
             case "3":
                 ExcluirLivroView excluirLivroView = new ExcluirLivroView();
@@ -77,6 +88,8 @@ public class AdminView {
                 }
                 break;
             case "5":
+                AtualizarUsuarioView atualizarUsuarioView = new AtualizarUsuarioView();
+                atualizarUsuarioView.exibirFormulario(scanner);
                 break;
             case "6":
                 ExcluirUsuarioView excluirUsuarioView = new ExcluirUsuarioView();
