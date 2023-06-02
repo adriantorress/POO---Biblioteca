@@ -16,10 +16,25 @@ public class EmprestimoBO {
 
     if (isAtivo && isQuantidadeDisponivel) {
       EmprestimoDAO.realizarEmprestimo(usuario, isbn);
+      EmprestimoDAO.atualizarLivro(isbn, "-", "INDISPONIVEL");
       return true;
     } else {
       return false;
     }
+  }
+
+  public static boolean devolverLivro(String usuario, String isbn) {
+    EmprestimoDAO.devolverLivro(usuario, isbn);
+    EmprestimoDAO.atualizarLivro(isbn, "+", "DISPONIVEL");
+    return true;
+
+  }
+
+  public static boolean verificarEmprestimo(String usuario, String isbn) {
+    if (EmprestimoDAO.verificarEmprestimo(usuario, isbn)) {
+      return true;
+    }
+    return false;
   }
 
   public static List<Livro> livrosDisponiveis() {

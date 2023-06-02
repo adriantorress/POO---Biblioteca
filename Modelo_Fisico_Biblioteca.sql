@@ -28,8 +28,10 @@ CREATE TABLE tb_livro (
   data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
   status ENUM('DISPONIVEL', 'INDISPONIVEL') DEFAULT 'DISPONIVEL'
 );
+
 INSERT INTO tb_usuario (nome,usuario,senha,email,telefone,cargo)
 VALUES ('Adrian','admin','administratorsky','admin@gmail.com','82 98888-8888','ADMINISTRADOR');
+
 
 
 CREATE TABLE tb_emprestimo (

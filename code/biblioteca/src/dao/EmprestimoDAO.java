@@ -32,6 +32,22 @@ public class EmprestimoDAO {
     }
   }
 
+  public static boolean devolverLivro(String usuario, String isbn) {
+    try (
+        Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = "DELETE FROM tb_emprestimo WHERE usuario_user = ? AND livro_isbn = ? ";
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, usuario);
+      stmt.setString(2, isbn);
+      stmt.executeUpdate();
+      System.out.println("\nLivro Devolvido com sucesso!");
+      return true;
+    } catch (SQLException e) {
+      System.out.println("\nErro ao devolver livro: " + e.getMessage());
+      return false;
+    }
+  }
+
   public static List<Emprestimo> meusEmprestimos(Usuario usuario) {
     List<Emprestimo> emprestimos = new ArrayList<>();
     try (
@@ -50,7 +66,6 @@ public class EmprestimoDAO {
         Emprestimo emprestimo = new Emprestimo(titulo, isbn, dataEmprestimo, dataDevolucao, status);
         emprestimos.add(emprestimo);
       }
-      System.out.println("\nBusca concluída com sucesso!");
       return emprestimos;
     } catch (SQLException e) {
       System.out.println("\nErro ao buscar empréstimos: " + e.getMessage());
@@ -67,7 +82,6 @@ public class EmprestimoDAO {
 
       while (rs.next()) {
         String titulo = rs.getString("titulo");
-        System.out.println(titulo);
         String isbn = rs.getString("isbn");
         String anoPublicacao = rs.getString("ano_publicacao");
 
@@ -78,14 +92,39 @@ public class EmprestimoDAO {
         Livro livro = new Livro(titulo, isbn, autor, anoPublicacao, categoria);
         livrosDisponiveis.add(livro);
       }
-      System.out.println("\nBusca concluída com sucesso!\n");
-
     } catch (SQLException e) {
       System.out.println("Erro ao obter livros: " + e.getMessage());
       return null;
     }
-    System.out.println(livrosDisponiveis);
     return livrosDisponiveis;
   }
 
+  public static boolean atualizarLivro(String isbn, String operacao, String status) {
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = String.format(
+          "UPDATE tb_livro SET quantidade_disponivel = quantidade_disponivel %s 1, status = CASE WHEN quantidade_disponivel %s 1 = 0 THEN '%s' ELSE status END WHERE isbn = ?",
+          operacao, operacao, status);
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, isbn);
+      stmt.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      System.out.println("\nErro ao atualizar Livro: " + e.getMessage());
+      return false;
+    }
+  }
+
+  public static boolean verificarEmprestimo(String usuario, String isbn) {
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = "SELECT * FROM tb_emprestimo WHERE usuario_user = ? AND livro_isbn = ?";
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      stmt.setString(1, usuario);
+      stmt.setString(2, isbn);
+      ResultSet rs = stmt.executeQuery();
+      return rs.next();
+    } catch (SQLException e) {
+      System.out.println("\nErro ao verificar usuario: " + e.getMessage());
+      return false;
+    }
+  }
 }

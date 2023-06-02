@@ -55,69 +55,92 @@ public class UsuarioView {
       case "2":
         List<Emprestimo> listaEmprestimos = UsuarioBO.meusEmprestimos(usuario);
         System.out.println();
-        System.out.println("Meus Empréstimos:");
-        for (Emprestimo emprestimo : listaEmprestimos) {
-          System.out.println();
-          System.out.printf("Título: %s", emprestimo.getTitulo());
-          System.out.println();
+        if (listaEmprestimos.size() > 0) {
+          System.out.println("Meus Empréstimos:");
+          for (Emprestimo emprestimo : listaEmprestimos) {
+            System.out.println();
+            System.out.printf("Título: %s", emprestimo.getTitulo());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
 
-          System.out.printf("ISBN: %s", emprestimo.getIsbn());
-          System.out.println();
-          System.out.println("-------------------");
-          System.out.println();
+            System.out.printf("ISBN: %s", emprestimo.getIsbn());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
 
-          System.out.printf("Data do Empréstimo: %s", emprestimo.getDataEmprestimo());
-          System.out.println();
-          System.out.println("-------------------");
-          System.out.println();
+            System.out.printf("Data do Empréstimo: %s", emprestimo.getDataEmprestimo());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
 
-          System.out.printf("Data de Devolução: %s", emprestimo.getDataDevolucao());
-          System.out.println();
-          System.out.println("-------------------");
-          System.out.println();
+            System.out.printf("Data de Devolução: %s", emprestimo.getDataDevolucao());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
 
-          System.out.printf("Status: %s", emprestimo.getStatus());
-          System.out.println();
-          System.out.println("-------------------");
-          System.out.println();
+            System.out.printf("Status: %s", emprestimo.getStatus());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
+            System.out.println();
+            System.out.println("--------------------------------------------------------------------------");
+            System.out.println();
+          }
+        } else {
+          System.out.println("Você não possui nenhum Empréstimo!");
         }
         break;
       case "3":
         List<Livro> livrosDisponiveis = EmprestimoBO.livrosDisponiveis();
         System.out.println();
-        System.out.println("Livros Disponíveis:");        
-        for (Livro livro : livrosDisponiveis) {
+        if (livrosDisponiveis.size() > 0) {
+          System.out.println("Livros Disponíveis:");
+          for (Livro livro : livrosDisponiveis) {
 
-          System.out.println();
-          System.out.printf("ISBN: %s", livro.getIsbn());
+            System.out.println();
+            System.out.printf("ISBN: %s", livro.getIsbn());
 
-          System.out.printf("\nTitulo: %s", livro.getTitulo());
-          System.out.println();
+            System.out.printf("\nTitulo: %s", livro.getTitulo());
+            System.out.println();
 
-          System.out.printf("Autor: %s", livro.getAutor());
-          System.out.println();
+            System.out.printf("Autor: %s", livro.getAutor());
+            System.out.println();
 
-          System.out.printf("Ano de Publicacao: %s", livro.getAnoPublicacao());
-          System.out.println();
+            System.out.printf("Ano de Publicacao: %s", livro.getAnoPublicacao());
+            System.out.println();
 
-          System.out.printf("Categoria: %s", livro.getCategoria());
-          System.out.println();
+            System.out.printf("Categoria: %s", livro.getCategoria());
+            System.out.println();
+          }
+        } else {
+          System.out.println("Nenhum Livro Disponível!");
         }
         break;
       case "4":
         List<Emprestimo> lEmprestimos = UsuarioBO.meusEmprestimos(usuario);
         System.out.println();
-        System.out.println("Meus Empréstimos:");
-        for (Emprestimo emprestimo : lEmprestimos) {
-          System.out.println();
-          System.out.printf("Título: %s", emprestimo.getTitulo());
-          System.out.println();
 
-          System.out.printf("ISBN: %s", emprestimo.getIsbn());
+        if (lEmprestimos.size() > 0) {
+          System.out.println("Meus Empréstimos:");
+          for (Emprestimo emprestimo : lEmprestimos) {
+            System.out.println();
+            System.out.printf("Título: %s", emprestimo.getTitulo());
+            System.out.println();
+
+            System.out.printf("ISBN: %s", emprestimo.getIsbn());
+            System.out.println();
+            System.out.println("-------------------");
+            System.out.println();
+          }
           System.out.println();
-          System.out.println("-------------------");
           System.out.println();
+          DevolverLivroView devolverLivroView = new DevolverLivroView();
+          devolverLivroView.exibirFormulario(scanner, usuario.getUsuario());
+        } else {
+          System.out.println("Você não possui nenhum Empréstimo!");
         }
+
         break;
 
     }
