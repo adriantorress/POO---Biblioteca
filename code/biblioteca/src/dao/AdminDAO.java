@@ -97,7 +97,6 @@ public class AdminDAO {
       PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, isbn);
       ResultSet rs = stmt.executeQuery();
-      System.out.println("\nBusca concluída com sucesso!");
 
       if (rs.next()) {
         String titulo = rs.getString("titulo");
@@ -125,7 +124,6 @@ public class AdminDAO {
       String sql = "SELECT titulo, isbn,quantidade_disponivel FROM tb_livro;";
       PreparedStatement stmt = conn.prepareStatement(sql);
       ResultSet rs = stmt.executeQuery();
-      System.out.println("\nBusca concluída com sucesso!");
 
       while (rs.next()) {
         String titulo = rs.getString("titulo");
@@ -177,7 +175,6 @@ public class AdminDAO {
       PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, username);
       ResultSet rs = stmt.executeQuery();
-      System.out.println("\nBusca concluída com sucesso!");
 
       if (rs.next()) {
         String user = rs.getString("usuario");
@@ -218,7 +215,6 @@ public class AdminDAO {
       String sql = "SELECT usuario FROM tb_usuario;";
       PreparedStatement stmt = conn.prepareStatement(sql);
       ResultSet rs = stmt.executeQuery();
-      System.out.println("\nBusca concluída com sucesso!");
 
       while (rs.next()) {
         String user = rs.getString("usuario");
