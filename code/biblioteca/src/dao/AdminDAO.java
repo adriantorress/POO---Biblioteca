@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Usuario;
 import model.Livro;
+import java.util.List;
+import java.util.ArrayList;
 
 public class AdminDAO {
   private static final String URL = "jdbc:mysql://localhost:3306/biblioteca";
@@ -116,6 +118,30 @@ public class AdminDAO {
     return null;
   }
 
+  public static List<Livro> buscarLivros() {
+    List<Livro> livros = new ArrayList<>();
+
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = "SELECT titulo, isbn,quantidade_disponivel FROM tb_livro;";
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      ResultSet rs = stmt.executeQuery();
+      System.out.println("\nBusca concluída com sucesso!");
+
+      while (rs.next()) {
+        String titulo = rs.getString("titulo");
+        String isbn = rs.getString("isbn");
+
+        Livro livro = new Livro(titulo, isbn);
+        livros.add(livro);
+      }
+    } catch (SQLException e) {
+      System.out.println("Erro ao obter livros: " + e.getMessage());
+    }
+
+    return livros;
+  }
+
+
   public static boolean atualizarUsuario(String usuario, String atributo, String novoValor) {
     try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
       String sql = String.format("UPDATE tb_usuario SET %s = ? WHERE usuario = ?", atributo);
@@ -183,6 +209,27 @@ public class AdminDAO {
       System.out.println("\nErro ao verificar usuario: " + e.getMessage());
       return false;
     }
+  }
+
+  public static List<Usuario> buscarUsuarios() {
+    List<Usuario> usuarios = new ArrayList<>();
+
+    try (Connection conn = DriverManager.getConnection(URL, USUARIO, SENHA)) {
+      String sql = "SELECT usuario FROM tb_usuario;";
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      ResultSet rs = stmt.executeQuery();
+      System.out.println("\nBusca concluída com sucesso!");
+
+      while (rs.next()) {
+        String user = rs.getString("usuario");
+        Usuario usuario = new Usuario(user);
+        usuarios.add(usuario);
+      }
+    } catch (SQLException e) {
+      System.out.println("Erro ao obter usuario: " + e.getMessage());
+    }
+
+    return usuarios;
   }
 
 }

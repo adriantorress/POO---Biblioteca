@@ -1,51 +1,50 @@
 package model;
 
-import java.util.Date;
-
 public class Emprestimo {
-    private int id;
-    private Date dataEmprestimo;
-    private Date dataDevolucao;
+    private String usuario;
+    private String dataEmprestimo;
+    private String titulo;
+    private String dataDevolucao;
     private String status;
+    private String isbn;
 
-    public Emprestimo(int id, Date dataEmprestimo, Date dataDevolucao, String status) {
-        this.id = id;
+    public Emprestimo(String user, String isbn) {
+        this.usuario = user;
+        this.isbn = isbn;
+    }
+
+    public Emprestimo(String titulo, String isbn,
+            String dataEmprestimo, String dataDevolucao, String status) {
+        this.titulo = titulo;
+        this.isbn = isbn;
         this.dataEmprestimo = dataEmprestimo;
-        this.dataDevolucao = dataDevolucao;
         this.status = status;
-    }
-
-    // Getters e Setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Date getDataEmprestimo() {
-        return dataEmprestimo;
-    }
-
-    public void setDataEmprestimo(Date dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
-    }
-
-    public Date getDataDevolucao() {
-        return dataDevolucao;
-    }
-
-    public void setDataDevolucao(Date dataDevolucao) {
         this.dataDevolucao = dataDevolucao;
+    }
+
+    public String getUsuario() {
+        return this.usuario;
+    }
+
+    public String getTitulo() {
+        return this.titulo;
+    }
+
+    public String getIsbn() {
+        return this.isbn;
+    }
+
+
+    public String getDataEmprestimo() {
+        return this.dataEmprestimo;
+    }
+
+    public String getDataDevolucao() {
+        return this.dataDevolucao;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

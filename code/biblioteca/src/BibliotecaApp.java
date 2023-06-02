@@ -31,13 +31,17 @@ public class BibliotecaApp {
                                     opcao = userOpcao;
                                     System.out.println("\nEncerrando o programa...");
                                     break;
-                                case "1":
+                                    case "1":
+                                    userView.boMethod("1");
                                     break;
                                 case "2":
+                                    userView.boMethod("2");
                                     break;
                                 case "3":
+                                    userView.boMethod("3");
                                     break;
                                 case "4":
+                                    userView.boMethod("4");
                                     break;
                                 case "5":
                                     System.out.println("\nSaindo...");
@@ -57,33 +61,39 @@ public class BibliotecaApp {
                                     System.out.println("\nEncerrando o programa...");
                                     break;
                                 case "1":
-                                adminView.boMethod("1");
+                                    adminView.boMethod("1");
                                     break;
                                 case "2":
-                                adminView.boMethod("2");
+                                    adminView.boMethod("2");
                                     break;
                                 case "3":
-                                adminView.boMethod("3");
+                                    adminView.boMethod("3");
                                     break;
                                 case "4":
-                                adminView.boMethod("4");
+                                    adminView.boMethod("4");
                                     break;
                                 case "5":
-                                adminView.boMethod("5");
+                                    adminView.boMethod("5");
                                     break;
                                 case "6":
-                                adminView.boMethod("6");
+                                    adminView.boMethod("6");
                                     break;
                                 case "7":
-                                adminView.boMethod("7");
+                                    adminView.boMethod("7");
                                     break;
                                 case "8":
+                                    adminView.boMethod("8");
+                                    break;
+                                case "9":
+                                    adminView.boMethod("9");
+                                    break;
+                                case "10":
                                     System.out.println("\nSaindo...");
                                     break;
                                 default:
                                     System.out.println("\nOpção inválida. Tente novamente.");
                             }
-                        } while (!adminOpcao.equals("0") && !adminOpcao.equals("8"));
+                        } while (!adminOpcao.equals("0") && !adminOpcao.equals("10"));
                     }
                     break;
                 case "2":

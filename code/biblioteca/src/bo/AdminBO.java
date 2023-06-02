@@ -3,6 +3,7 @@ package bo;
 import dao.AdminDAO;
 import model.Usuario;
 import model.Livro;
+import java.util.List;
 
 public class AdminBO {
 
@@ -39,12 +40,15 @@ public class AdminBO {
             return AdminDAO.buscarLivro(livro);
         }
         return null;
-    };
+    }
+
+    public static List<Livro> buscarLivros() {
+        return AdminDAO.buscarLivros();
+    }
 
     public static void atualizarUsuario(String usuario, String atributo, String novoValor) {
         AdminDAO.atualizarUsuario(usuario, atributo, novoValor);
     }
-
 
     public static void excluirUsuario(String usuario) {
         AdminDAO.excluirUsuario(usuario);
@@ -67,6 +71,10 @@ public class AdminBO {
             return AdminDAO.buscarUsuario(usuario);
         }
         return null;
-    };
+    }
+
+    public static List<Usuario> buscarUsuarios() {
+        return AdminDAO.buscarUsuarios();
+    }
 
 }

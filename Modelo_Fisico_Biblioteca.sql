@@ -15,6 +15,7 @@ CREATE TABLE tb_usuario (
   telefone VARCHAR(20) UNIQUE,
   status ENUM('ATIVO', 'INATIVO', 'SUSPENSO') DEFAULT 'ATIVO'
 );
+  
 
 CREATE TABLE tb_livro (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,17 +24,21 @@ CREATE TABLE tb_livro (
   isbn VARCHAR(20) UNIQUE,
   ano_publicacao INT,
   categoria VARCHAR(30),
-  quantidade_disponivel INT DEFAULT 0,
+  quantidade_disponivel INT DEFAULT 1,
   data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
   status ENUM('DISPONIVEL', 'INDISPONIVEL') DEFAULT 'DISPONIVEL'
 );
+INSERT INTO tb_usuario (nome,usuario,senha,email,telefone,cargo)
+VALUES ('Adrian','admin','administratorsky','admin@gmail.com','82 98888-8888','ADMINISTRADOR');
+
 
 CREATE TABLE tb_emprestimo (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  usuario_id INT,
-  livro_id INT,
+  usuario_user VARCHAR(50),
+  livro_isbn VARCHAR(50),
   data_emprestimo DATE NOT NULL DEFAULT (CURRENT_DATE),
-  data_devolucao DATE NOT NULL,
-  FOREIGN KEY (livro_id) REFERENCES tb_livro (id),
+  data_devolucao DATE NOT NULL DEFAULT (DATE_ADD(CURRENT_DATE(), INTERVAL 3 DAY)),
+  FOREIGN KEY (livro_isbn) REFERENCES tb_livro (isbn),
+  FOREIGN KEY (usuario_user) REFERENCES tb_usuario(usuario),
   status ENUM('EM ANDAMENTO', 'FINALIZADO', 'CANCELADO', 'ATRASADO') NOT NULL DEFAULT 'EM ANDAMENTO'
 );

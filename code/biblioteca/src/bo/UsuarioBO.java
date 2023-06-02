@@ -2,6 +2,9 @@ package bo;
 
 import dao.UsuarioDAO;
 import model.Usuario;
+import model.Emprestimo;
+import java.util.List;
+import dao.EmprestimoDAO;
 
 public class UsuarioBO {
 
@@ -23,7 +26,6 @@ public class UsuarioBO {
         }
     }
 
-
     public static void cadastrarUsuario(String name, String username, String password) {
         boolean isUsuarioCadastrado = verificarUsuarioCadastrado(username);
         if (!isUsuarioCadastrado) {
@@ -32,7 +34,6 @@ public class UsuarioBO {
         ;
     }
 
-
     public static boolean verificarUsuarioCadastrado(String username) {
         if (UsuarioDAO.verificarUsuarioCadastrado(username)) {
             return true;
@@ -40,6 +41,11 @@ public class UsuarioBO {
         return false;
     }
 
-    
+    public static List<Emprestimo> meusEmprestimos(Usuario username) {
+
+        List<Emprestimo> emprestimos = EmprestimoDAO.meusEmprestimos(username);
+        return emprestimos;
+
+    }
 
 }

@@ -20,6 +20,10 @@ public class Usuario {
     this.telefone = telefone;
   }
 
+  public Usuario(String usuario) {
+    this.usuario = usuario;
+  }
+
   public String getUsuario() {
     return this.usuario;
   }
