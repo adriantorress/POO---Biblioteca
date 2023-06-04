@@ -15,7 +15,6 @@ CREATE TABLE tb_usuario (
   telefone VARCHAR(20) UNIQUE,
   status ENUM('ATIVO', 'INATIVO', 'SUSPENSO') DEFAULT 'ATIVO'
 );
-  
 
 CREATE TABLE tb_livro (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -28,6 +27,7 @@ CREATE TABLE tb_livro (
   data_cadastro DATE NOT NULL DEFAULT (CURRENT_DATE),
   status ENUM('DISPONIVEL', 'INDISPONIVEL') DEFAULT 'DISPONIVEL'
 );
+SET SQL_SAFE_UPDATES = 0;
 
 INSERT INTO tb_usuario (nome,usuario,senha,email,telefone,cargo)
 VALUES ('Adrian','admin','administratorsky','admin@gmail.com','82 98888-8888','ADMINISTRADOR');
